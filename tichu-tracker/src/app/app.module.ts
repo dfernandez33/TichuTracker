@@ -5,6 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AngularFireModule } from '@angular/fire';
+import { LoginModule } from './login/login.module';
+import { RegistrationModule } from './registration/registration.module';
+import { HomeModule } from './home/home.module';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBH3o5xBWtzYrFuJXvzNAGIO9GbXuitOD0",
+  authDomain: "tichu-tracker-beec0.firebaseapp.com",
+  databaseURL: "https://tichu-tracker-beec0.firebaseio.com",
+  projectId: "tichu-tracker-beec0",
+  storageBucket: "tichu-tracker-beec0.appspot.com",
+  messagingSenderId: "35376810691",
+  appId: "1:35376810691:web:51aedb339e41dc76c97076",
+  measurementId: "G-58Y821VBHQ"
+};
+
 @NgModule({
   declarations: [
     AppComponent
@@ -12,7 +28,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    LoginModule,
+    RegistrationModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

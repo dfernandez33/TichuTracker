@@ -1,0 +1,30 @@
+@import '../common/mixins';
+
+.center {
+    @include center;
+}
+
+mat-card {
+    max-width: 75vw;
+    margin: auto;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button-container > :first-child {
+    margin-right: 5%;
+}
+
+button {
+    width: 33%;
+}
+
+.errorMessage {
+    color: red;
+}
