@@ -10,6 +10,7 @@ import { LoginModule } from './login/login.module';
 import { RegistrationModule } from './registration/registration.module';
 import { HomeModule } from './home/home.module';
 import { NavbarModule } from './navbar/navbar.module';
+import { GameModule } from './game/game.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBH3o5xBWtzYrFuJXvzNAGIO9GbXuitOD0",
@@ -34,7 +35,8 @@ const firebaseConfig = {
     LoginModule,
     RegistrationModule,
     HomeModule,
-    NavbarModule
+    NavbarModule,
+    GameModule
   ],
   providers: [],
   bootstrap: [AppComponent]
