@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { LoginModule } from './login/login.module';
 import { RegistrationModule } from './registration/registration.module';
 import { HomeModule } from './home/home.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBH3o5xBWtzYrFuJXvzNAGIO9GbXuitOD0",
@@ -32,7 +33,8 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     LoginModule,
     RegistrationModule,
-    HomeModule
+    HomeModule,
+    NavbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

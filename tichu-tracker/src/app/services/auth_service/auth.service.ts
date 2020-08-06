@@ -29,6 +29,14 @@ export class AuthService {
     return this.auth.currentUser;
   }
 
+  public getAuthState() {
+    return this.auth.authState;
+  }
+
+  public signOut() {
+    return this.auth.signOut();
+  }
+
   private addUserToDB(email: string, username: string) {
     return this.db.collection('users').add({
       username: username,

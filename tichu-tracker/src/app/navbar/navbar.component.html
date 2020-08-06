@@ -1,0 +1,17 @@
+<mat-toolbar class="app-toolbar" color="primary">
+    <span>
+        <a [routerLink]="['/home']">
+            Tichu Tracker
+        </a>
+    </span>
+    <span class="spacer"></span>
+    <div *ngIf="authState$ | async">
+        <button mat-icon-button (click)="router.navigate(['/profile'])">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <button mat-icon-button (click)="signOut()">
+            <mat-icon>login</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
