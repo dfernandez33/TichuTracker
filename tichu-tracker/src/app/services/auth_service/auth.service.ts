@@ -20,7 +20,7 @@ export class AuthService {
     return this.auth.createUserWithEmailAndPassword(email, password)
       .then(async res => 
         {
-          this.addUserToDB(email, username).catch(error => {throw error});
+          await this.addUserToDB(res.user, username).catch(error => {throw error});
         })
       .catch(error => {throw error;});
   }
@@ -37,10 +37,12 @@ export class AuthService {
     return this.auth.signOut();
   }
 
-  private addUserToDB(email: string, username: string) {
-    return this.db.collection('users').add({
-      username: username,
-      email: email
-    }).catch(error => {throw error});
+  private async addUserToDB(user: firebase.User, username: string) {
+    try {
+      await user.updateProfile({displayName: username});
+      await this.db.collection('users').add({}).catch(error => {throw error});
+    } catch(e) {
+      throw e;
+    }
   }
 }
