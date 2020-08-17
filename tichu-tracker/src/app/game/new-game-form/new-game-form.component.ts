@@ -39,8 +39,15 @@ export class NewGameFormComponent {
   filterUsers(event) {
     const query = event.target.value;
     this.userService.filterUsers(query, 5).then(users => {
-      this.filteredUsers = users.docs;
-    })
+      this.filteredUsers = users.docs.filter(user => {
+        const controls = this.startGameForm.controls;
+        const username = user.data().username;
+        return username != controls['team1_member1'].value 
+          && username != controls['team1_member2'].value
+          && username != controls['team2_member1'].value
+          && username != controls['team2_member2'].value;
+      });
+    });
   }
 
   clearFilter() {
