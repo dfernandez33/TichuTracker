@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { INewGame, IRoundInformation, TichuType } from '../../common/interfaces';
 import { firestore } from '../../../../node_modules/firebase';
+import { UserService } from '../user_service/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  constructor(private readonly db: AngularFirestore) { }
+  constructor(private readonly db: AngularFirestore, private readonly userService: UserService) { }
 
   createGame() {
     return this.db.collection('games').add({
@@ -50,6 +51,7 @@ export class GameService {
       })
     });
     await this.updateUserTichuRecords(batch, roundInformation);
+    await this.userService.addGameToUserRecords(gameId, winner, loser);
     return batch.commit();
   }
 
