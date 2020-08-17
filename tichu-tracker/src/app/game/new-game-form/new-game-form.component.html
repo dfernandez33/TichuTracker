@@ -1,0 +1,41 @@
+<form [formGroup]="startGameForm">
+    <p>Team 1 Members</p>
+    <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="team1_member1" required [matAutocomplete]="auto" (keyup)="filterUsers($event)">
+        <mat-icon matPrefix>account_circle</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="team1_member2" required [matAutocomplete]="auto" (keyup)="filterUsers($event)">
+        <mat-icon matPrefix>account_circle</mat-icon>
+    </mat-form-field>
+    <p>Team 2 Members</p>
+    <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="team2_member1" required [matAutocomplete]="auto" (keyup)="filterUsers($event)">
+        <mat-icon matPrefix>account_circle</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="team2_member2" required [matAutocomplete]="auto" (keyup)="filterUsers($event)">
+        <mat-icon matPrefix>account_circle</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent" class="target-score">
+        <mat-label>Target Score</mat-label>
+        <input matInput formControlName="targetScore" type="number" required>
+        <mat-icon matPrefix>emoji_events</mat-icon>
+    </mat-form-field>
+</form>
+<p class="error-message" *ngIf="errorMessage.length > 0">
+    {{errorMessage}}
+</p>
+<button mat-raised-button color="primary" (click)="startGame()" [disabled]="startGameForm.invalid">
+    Start Game
+</button>
+
+<mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearFilter()">
+    <mat-option *ngFor="let user of filteredUsers" [value]="user.data().username">
+        {{user.data().username}}
+    </mat-option>
+</mat-autocomplete>

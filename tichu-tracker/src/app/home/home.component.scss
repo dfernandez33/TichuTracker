@@ -1,3 +1,10 @@
+@import '../common/mixins';
+
+.center {
+    @include center;
+    margin-top: 40vh !important;
+}
+
 p {
     color: white;
 }
@@ -6,4 +13,8 @@ p {
     position: absolute;
     right: 5%;
     bottom: 2.5%;
+}
+
+input {
+    color: white;
 }

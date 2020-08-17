@@ -1,3 +1,26 @@
+@import '../common/mixins';
+
+.center {
+    @include center;
+    margin-top: 2.5vh !important;
+}
+
+.score-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+mat-card {
+    width: 75vw;
+    margin: auto;
+}
+
 p {
     color: white;
+}
+
+.fab {
+    position: absolute;
+    right: 5%;
+    bottom: 2.5%;
 }

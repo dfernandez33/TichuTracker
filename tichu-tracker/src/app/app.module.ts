@@ -11,6 +11,8 @@ import { RegistrationModule } from './registration/registration.module';
 import { HomeModule } from './home/home.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { GameModule } from './game/game.module';
+import { NewGameFormModule } from './game/new-game-form/new-game-form.module';
+import { NewRoundFormModule } from './game/new-round-form/new-round-form.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBH3o5xBWtzYrFuJXvzNAGIO9GbXuitOD0",
@@ -36,7 +38,9 @@ const firebaseConfig = {
     RegistrationModule,
     HomeModule,
     NavbarModule,
-    GameModule
+    GameModule,
+    NewGameFormModule,
+    NewRoundFormModule
   ],
   providers: [],
   bootstrap: [AppComponent]

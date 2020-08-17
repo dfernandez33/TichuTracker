@@ -1,0 +1,54 @@
+<form [formGroup]="newRoundForm">
+    <ng-container *ngTemplateOutlet="teamScore; context: {team: 'team1'}"></ng-container>
+    <ng-container *ngTemplateOutlet="teamScore; context: {team: 'team2'}"></ng-container>
+</form>
+<p class="error-message" *ngIf="errorMessage.length > 0">
+    {{errorMessage}}
+</p>
+<button class="submit-button" mat-raised-button color="primary" (click)="addRound()" 
+[disabled]="newRoundForm.invalid">
+    Next Round
+</button>
+
+<ng-template #teamScore let-team="team">
+    <p>Team {{team === 'team1' ? 1 : 2}} Score</p>
+    <mat-form-field appearance="outline" color="accent">
+        <mat-label>Raw Score</mat-label>
+        <input matInput type="number" [formControl]="newRoundForm.get(team + 'Score')" required>
+        <mat-icon matPrefix>money</mat-icon>
+        <mat-hint>Don't include points earned from Tichus</mat-hint>
+    </mat-form-field>
+    <div class="tichu-container">
+        <mat-radio-group [formControl]="newRoundForm.get(team + 'Tichu')">
+            <mat-radio-button [value]="TichuType.TICHU">
+                Tichu
+            </mat-radio-button>
+            <mat-radio-button [value]="TichuType.GRAND_TICHU">
+                Grand Tichu
+            </mat-radio-button>
+        </mat-radio-group>
+        <button mat-raised-button color="primary" (click)="resetTichu(team)">Reset</button>
+    </div>
+    <ng-container *ngIf="newRoundForm.get(team + 'Tichu').value !== TichuType.NONE">
+        <ng-container *ngTemplateOutlet="selectTichuUser; context: {team: team}"></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #selectTichuUser let-team="team" class="tichu-info">
+    <mat-form-field class="tichu-field" appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput 
+        [formControl]="newRoundForm.get(team + 'TichuUser')" 
+        [matAutocomplete]="auto" (keyup)="filterUsers($event)">
+        <mat-icon matPrefix>account_circle</mat-icon>
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearFilter()">
+        <mat-option *ngFor="let user of filteredUsers" [value]="user.data().username">
+            {{user.data().username}}
+        </mat-option>
+    </mat-autocomplete>
+    <mat-checkbox 
+    [formControl]="newRoundForm.get(team + 'TichuSuccess')" >
+        Successful
+    </mat-checkbox>
+</ng-template>

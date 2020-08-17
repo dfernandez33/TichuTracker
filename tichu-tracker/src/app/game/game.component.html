@@ -1,3 +1,46 @@
-<p>game works!</p>
-<p>Game ID: {{gameId}}</p>
-<p>Game Mode: {{(routingQueryParameters$ | async)?.get('mode')}}</p>
+<ng-container *ngIf="routingQueryParameters$ | async as queryParams">
+    <div *ngIf="queryParams.get('mode') === 'new_round'" class="center">
+        <mat-card>
+            <mat-card-content>
+                <p><strong>Target Score:</strong> {{targetScore}}</p>
+                <div class="score-container">
+                    <p>{{team1}}: {{team1Score}}</p>
+                    <p>{{team2}}: {{team2Score}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="center">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <ng-container 
+                    [ngSwitch]="queryParams.get('mode')">
+                        <p *ngSwitchCase="'create'">Start New Game</p>
+                        <p *ngSwitchCase="'new_round'">New Round</p>
+                        <p *ngSwitchCase="'done'">Game Complete</p>
+                    </ng-container>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <ng-container 
+                [ngSwitch]="queryParams.get('mode')">
+                    <new-game-form *ngSwitchCase="'create'" [errorMessage]="startGameError" 
+                        (gameInformation)="startGame($event)">
+                    </new-game-form>
+                    <new-round-form *ngSwitchCase="'new_round'" [errorMessage]="roundError"
+                        (roundInformation)="addRound($event)">
+                    </new-round-form>
+                    <ng-container *ngSwitchCase="'done'">
+                        <p>Congratulations {{parseWinner(queryParams.get('winner'))}} you won!</p>
+                        <p>Game statistic coming soon...</p>
+                    </ng-container>
+                    <p *ngSwitchDefault>Error Creating your game</p>
+                </ng-container>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <button *ngIf="queryParams.get('mode') == 'done'" mat-fab class="fab" (click)="newGame()">
+        <mat-icon>add</mat-icon>
+    </button>
+</ng-container>

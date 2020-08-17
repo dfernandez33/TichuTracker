@@ -7,7 +7,7 @@
     </span>
     <span class="spacer"></span>
     <div *ngIf="authState$ | async as user">
-        <button mat-button (click)="router.navigate(['/profile'])">
+        <button mat-button>
             {{user.displayName}} <mat-icon>account_circle</mat-icon>
         </button>
         <button mat-icon-button (click)="signOut()">

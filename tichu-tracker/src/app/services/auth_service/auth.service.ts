@@ -40,7 +40,9 @@ export class AuthService {
   private async addUserToDB(user: firebase.User, username: string) {
     try {
       await user.updateProfile({displayName: username});
-      await this.db.collection('users').add({}).catch(error => {throw error});
+      await this.db.collection('users').add({
+        username: username
+      }).catch(error => {throw error});
     } catch(e) {
       throw e;
     }
