@@ -41,7 +41,12 @@ export class AuthService {
     try {
       await user.updateProfile({displayName: username});
       await this.db.collection('users').add({
-        username: username
+        username: username,
+        gamesPlayed: 0,
+        wins: 0,
+        tichuCount: 0,
+        tichuWins: 0,
+        games: []
       }).catch(error => {throw error});
     } catch(e) {
       throw e;
